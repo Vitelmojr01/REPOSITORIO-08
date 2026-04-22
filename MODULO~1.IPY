@@ -2,203 +2,187 @@
  "cells": [
   {
    "cell_type": "markdown",
-   "id": "387ba9ac",
+   "id": "5fb2f226",
    "metadata": {},
    "source": [
-    "modulo 24 - combinação de modelos II - "
+    "Modulo 24 - combinação de modelos II - tarefa 02"
    ]
   },
   {
    "cell_type": "markdown",
-   "id": "a4a84cfd",
+   "id": "e90d5eb6",
    "metadata": {},
    "source": [
-    "tarefa 01 - exercicio 01 - 5 diferenças RF e adaboost"
+    "tarefa 02 - exercicio 01 - 5 diferenças entre AdaBoost e GBM"
    ]
   },
   {
    "cell_type": "markdown",
-   "id": "12ac1951",
+   "id": "4365625d",
    "metadata": {},
    "source": [
-    "5 diferenças.\n",
-    "\n",
-    "5 diferenças entre Random Forest e AdaBoost\n",
-    "Random Forest cria várias árvores independentes; AdaBoost cria modelos sequenciais, em que cada um corrige erros do anterior.\n",
-    "Random Forest usa bagging; AdaBoost usa boosting.\n",
-    "Random Forest reduz mais variância; AdaBoost busca reduzir mais viés.\n",
-    "Random Forest normalmente usa árvores profundas; AdaBoost costuma usar stumps (árvores rasas).\n",
-    "Random Forest combina por votação/média; AdaBoost combina por pesos.\n",
-    "Exemplo de notebook AdaBoost"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "22c72eb6",
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  },
-  {
-   "cell_type": "markdown",
-   "id": "4a647a3b",
-   "metadata": {},
-   "source": [
-    "tarefa 01 - exercicio 02 - Exemplo de notebook AdaBoost"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "7033491b",
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "from sklearn.datasets import load_iris\n",
-    "from sklearn.model_selection import train_test_split\n",
-    "from sklearn.ensemble import AdaBoostClassifier\n",
-    "from sklearn.metrics import accuracy_score\n",
-    "\n",
-    "X, y = load_iris(return_X_y=True)\n",
-    "X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)\n",
-    "\n",
-    "modelo = AdaBoostClassifier(n_estimators=50, learning_rate=1.0, random_state=42)\n",
-    "modelo.fit(X_train, y_train)\n",
-    "pred = modelo.predict(X_test)\n",
-    "\n",
-    "print(\"Acurácia:\", accuracy_score(y_test, pred))"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "2df544db",
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  },
-  {
-   "cell_type": "markdown",
-   "id": "9d47172d",
-   "metadata": {},
-   "source": [
-    "tarefa 01 - exercicio 03 - 5 hiperparâmetros importantes"
+    "5 diferenças entre AdaBoost e GBM\n",
+    "AdaBoost usa stumps (árvores rasas); GBM usa árvores mais profundas.\n",
+    "AdaBoost ajusta pesos das observações; GBM ajusta resíduos (erros).\n",
+    "AdaBoost começa com um modelo simples direto; GBM começa pela média do target.\n",
+    "AdaBoost dá pesos diferentes para cada modelo; GBM usa learning rate igual para todos.\n",
+    "AdaBoost foca nos erros via reponderação; GBM aprende via gradiente descendente (otimizando erro)."
    ]
   },
   {
    "cell_type": "markdown",
-   "id": "f5521813",
+   "id": "29ae933d",
    "metadata": {},
    "source": [
-    "n_estimators, learning_rate, estimator, random_state, algorithm.\n",
-    "\n",
-    "\n",
-    "n_estimators\n",
-    "É a quantidade de modelos (árvores/stumps) que o AdaBoost vai criar.\n",
-    "Mais estimadores = modelo mais forte, porém mais lento e risco de overfitting. \n",
-    "\n",
-    "learning_rate\n",
-    "Controla o peso de cada modelo na combinação final.\n",
-    " Valores menores fazem o aprendizado ser mais “lento e seguro” (melhor generalização). \n",
-    "estimator\n",
-    "É o modelo base usado no boosting (geralmente uma árvore simples).\n",
-    " Exemplo: DecisionTreeClassifier(max_depth=1) (stump). \n",
-    "random_state\n",
-    "Controla a aleatoriedade do modelo.\n",
-    " Serve para você conseguir reproduzir os mesmos resultados sempre. \n",
-    "\n",
-    "algorithm\n",
-    "Define o tipo de boosting usado:\n",
-    "SAMME → classificação direta\n",
-    "SAMME.R → usa probabilidades (mais comum)\n",
-    "Isso influencia como os erros são ajustados a cada etapa.\n",
-    "\n",
-    " Resumo:\n",
-    "\n",
-    "n_estimators = quantidade\n",
-    "learning_rate = intensidade\n",
-    "estimator = tipo de modelo\n",
-    "random_state = consistência\n",
-    "algorithm = estratégia de aprendizado\n"
+    "tarefa 02 - exercicio 02 - Código Jupyter (classificação + regressão GBM)"
    ]
   },
   {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "1f95c2f9",
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  },
-  {
    "cell_type": "markdown",
-   "id": "77aa52c8",
+   "id": "ef51c08d",
    "metadata": {},
    "source": [
-    "tarefa 01 - exercicio 04 - Opcional - GridSearch"
+    "codigo"
    ]
   },
   {
    "cell_type": "code",
    "execution_count": 2,
-   "id": "8b30260c",
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "from sklearn.datasets import load_iris\n",
-    "from sklearn.model_selection import train_test_split\n",
-    "\n",
-    "X, y = load_iris(return_X_y=True)\n",
-    "\n",
-    "X_train, X_test, y_train, y_test = train_test_split(\n",
-    "    X, y, test_size=0.3, random_state=42, stratify=y\n",
-    ")"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 3,
-   "id": "a15e81ea",
+   "id": "5a14248e",
    "metadata": {},
    "outputs": [
     {
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "Melhores parâmetros: {'learning_rate': 1.0, 'n_estimators': 100}\n",
-      "Melhor score médio: 0.9619047619047618\n"
+      "Acurácia: 1.0\n",
+      "MSE: 10798.641053683888\n"
      ]
     }
    ],
    "source": [
-    "from sklearn.ensemble import AdaBoostClassifier\n",
-    "from sklearn.model_selection import GridSearchCV\n",
+    "from sklearn.datasets import load_iris, make_regression\n",
+    "from sklearn.model_selection import train_test_split\n",
+    "from sklearn.ensemble import GradientBoostingClassifier, GradientBoostingRegressor\n",
+    "from sklearn.metrics import accuracy_score, mean_squared_error\n",
     "\n",
-    "param_grid = {\n",
-    "    'n_estimators': [30, 50, 100],\n",
-    "    'learning_rate': [0.1, 0.5, 1.0]\n",
-    "}\n",
+    "# Classificação\n",
+    "X, y = load_iris(return_X_y=True)\n",
+    "X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)\n",
     "\n",
-    "grid = GridSearchCV(\n",
-    "    AdaBoostClassifier(random_state=42),\n",
-    "    param_grid=param_grid,\n",
-    "    cv=5\n",
-    ")\n",
+    "clf = GradientBoostingClassifier()\n",
+    "clf.fit(X_train, y_train)\n",
+    "pred = clf.predict(X_test)\n",
+    "print(\"Acurácia:\", accuracy_score(y_test, pred))\n",
     "\n",
-    "grid.fit(X_train, y_train)\n",
+    "# Regressão\n",
+    "Xr, yr = make_regression(n_samples=200, noise=0.1)\n",
+    "Xr_train, Xr_test, yr_train, yr_test = train_test_split(Xr, yr, test_size=0.3)\n",
     "\n",
-    "print(\"Melhores parâmetros:\", grid.best_params_)\n",
-    "print(\"Melhor score médio:\", grid.best_score_)"
+    "reg = GradientBoostingRegressor()\n",
+    "reg.fit(Xr_train, yr_train)\n",
+    "pred_r = reg.predict(Xr_test)\n",
+    "print(\"MSE:\", mean_squared_error(yr_test, pred_r))"
    ]
   },
   {
    "cell_type": "code",
    "execution_count": null,
-   "id": "de2175b8",
+   "id": "bfa6ccab",
    "metadata": {},
    "outputs": [],
    "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "d5e3fc27",
+   "metadata": {},
+   "source": [
+    "tarefa 02 - exercicio 03 - 5 hiperparâmetros importantes (GBM)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "2d11b23b",
+   "metadata": {},
+   "source": [
+    "5 hiperparâmetros importantes (GBM)\n",
+    "n_estimators (nº de árvores)\n",
+    "learning_rate (taxa de aprendizado)\n",
+    "max_depth (profundidade)\n",
+    "min_samples_split\n",
+    "subsample"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "1211dc13",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "950ce095",
+   "metadata": {},
+   "source": [
+    "tarefa 02 - exercicio 03 - (Opcional) GridSearch"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "8473e479",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "{'learning_rate': 0.05, 'max_depth': 2, 'n_estimators': 50}\n"
+     ]
+    }
+   ],
+   "source": [
+    "from sklearn.model_selection import GridSearchCV\n",
+    "\n",
+    "param_grid = {\n",
+    "    'n_estimators': [50,100],\n",
+    "    'learning_rate': [0.05, 0.1],\n",
+    "    'max_depth': [2,3]\n",
+    "}\n",
+    "\n",
+    "grid = GridSearchCV(GradientBoostingClassifier(), param_grid, cv=5)\n",
+    "grid.fit(X_train, y_train)\n",
+    "\n",
+    "print(grid.best_params_)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "f1dabfe5",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "id": "ced7614e",
+   "metadata": {},
+   "source": [
+    "tarefa 02 - exercicio 04 - 5. Diferença GBM vs Stochastic GBM"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "c9f56f1f",
+   "metadata": {},
+   "source": [
+    "O Stochastic GBM usa amostragem aleatória (subsample < 1) \n",
+    "cada árvore, reduzindo overfitting e aumentando generalização."
+   ]
   }
  ],
  "metadata": {
